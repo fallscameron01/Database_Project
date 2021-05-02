@@ -2,17 +2,17 @@ const db = require("../models");
 const User = db.user;
 const Op = db.Sequelize.Op;
 
-// Get all users
+// Create User
 exports.createUser = (req, res) => {
   // Validate request
-  if (!req.body.title) {
+  if (!req.body.username || !req.body.password) {
     res.status(400).send({
       message: "Content can not be empty!"
     });
     return;
   }
 
-  // Create a Tutorial
+  // Create a user
   const user = {
     username: req.body.username,
     password: req.body.password
