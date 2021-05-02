@@ -1,5 +1,5 @@
 import React from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import addNew from "./images/add-new.PNG";
 
 // This is hardcoded data for now
 // We will get this data from the database using an API call
@@ -29,8 +29,18 @@ const data = [
 function Library() {
   return (
     <div style={{padding: 50}}>
+      <div style={{display: "inline-block"}}>
+        <img src={addNew} width="200px" height="270px" style={{margin: 15}} />
+        <h5 className="text-center">Add New</h5>
+      </div>
+      
         {data.map((el) => {
-          return (<img src={el.box_art} width="200px" height="300px" style={{margin: 15}} />)
+            return (
+              <div style={{display: "inline-block"}}>
+                <img src={el.box_art} width="200px" height="270px" style={{margin: 15}} />
+                <h5 className="text-center">{el.title}</h5>
+              </div>
+            )
         })}
     </div>
   );
