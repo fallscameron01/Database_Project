@@ -48,7 +48,7 @@ function Library() {
     else {
       setSort("reverse");
     }
-  };  
+  };
 
   return (
     <div style={{padding: 50}}>
@@ -74,7 +74,7 @@ function Library() {
       
         {(sort === "alphabetical" ? data.sort((a, b) => (a.title > b.title) ? 1 : -1) : data.sort((a, b) => (a.title < b.title) ? 1 : -1)).map((el) => {
             return (el.type === type || type === "All" ?
-              <div style={{display: "inline-block"}}>
+              <div style={{display: "inline-block"}} title={el.description}>
                 <img src={el.box_art} width="auto" height="270px" style={{margin: 15}} />
                 <h5 className="text-center">{el.title}</h5>
               </div> : <></>
