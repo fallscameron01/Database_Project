@@ -50,6 +50,10 @@ function Library() {
     }
   };
 
+  const addNewMedia = () => {
+    document.getElementById("add-new-media").click();
+  };
+
   return (
     <div style={{padding: 50}}>
       <div style={{display: "block"}}>
@@ -68,7 +72,7 @@ function Library() {
       </div>
 
       <div style={{display: "inline-block"}}>
-        <img src={addNew} width="auto" height="270px" style={{margin: 15}} />
+        <img src={addNew} width="auto" height="270px" style={{margin: 15}} onClick={addNewMedia} className="hoverable" />
         <h5 className="text-center">Add New</h5>
       </div>
       

@@ -9,6 +9,7 @@ import Library from "../library/index";
 import Wishlist from "../wishlist/index";
 import DeleteAccount from "../delete-account/index";
 import Login from "../login/index";
+import AddNewMedia from "../add-new-media/index";
 
 export default function App() {
   return (
@@ -25,6 +26,11 @@ export default function App() {
               <li>
                 <Link to="/wishlist">
                   <a className="nav-link" href="#" style={{color: "black", fontSize: "22px", fontWeight: "bold"}}>Wishlist</a>
+                </Link>
+              </li>
+              <li style={{display: "none"}}>
+                <Link to="/add-new-media">
+                  <a className="nav-link" href="#" id="add-new-media">&nbsp;</a>
                 </Link>
               </li>
             </ul>
@@ -57,6 +63,9 @@ export default function App() {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/add-new-media">
+            <AddNewMedia />
           </Route>
         </Switch>
       </div>
