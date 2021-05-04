@@ -12,7 +12,8 @@ import DeleteAccount from "../delete-account/index";
 import Login from "../login/index";
 import AddNewMedia from "../add-new-media/index";
 import Welcome from "../welcome/index";
-import Signup from "../signup/index"
+import Signup from "../signup/index";
+import "./index.css";
 
 export default function App() {
   return (
@@ -23,17 +24,17 @@ export default function App() {
             <ul className="navbar-nav">
               <li className="nav-item active">
                 <Link to="/library">
-                  <a className="nav-link" href="#" style={{color: "black", fontSize: "22px", fontWeight: "bold"}}>Library</a>
+                  <a class="nav-link" href="#">Library</a>
                 </Link>
               </li>
               <li>
                 <Link to="/wishlist">
-                  <a className="nav-link" href="#" style={{color: "black", fontSize: "22px", fontWeight: "bold"}}>Wishlist</a>
+                  <a class="nav-link" href="#">Wishlist</a>
                 </Link>
               </li>
               <li style={{display: "none"}}>
                 <Link to="/add-new-media">
-                  <a className="nav-link" href="#" id="add-new-media">&nbsp;</a>
+                  <a class="nav-link" href="#" id="add-new-media">&nbsp;</a>
                 </Link>
               </li>
             </ul>
@@ -42,12 +43,12 @@ export default function App() {
             <ul className="navbar-nav ml-auto">
               <li>
                 <Link to="/delete-account">
-                  <a className="nav-link" href="#" style={{color: "red", fontSize: "22px", fontWeight: "bold"}}>Delete Account</a>
+                  <a class="nav-link" href="#" style={{color:"red"}}>Delete Account</a>
                 </Link>
               </li>
               <li>
                 <Link to="/login">
-                  <a className="nav-link" href="#" style={{color: "black", fontSize: "22px", fontWeight: "bold"}}>Sign Out</a>
+                  <a class="nav-link" href="#">Sign Out</a>
                 </Link>
               </li>
             </ul>
