@@ -1,0 +1,57 @@
+.welcome_body {
+    padding-top: 10%;
+    text-align: center;
+}
+
+.welcome_message {
+    font-size: 200%;
+}
+
+.login_button {
+    display: inline-block;
+    text-align: center;
+    background-color: #6F89CB;
+    font-size: 150%;
+    width: 10%;
+    margin-top: 5%;
+}
+
+.login_button:hover {
+    background-color: #88a6f3;
+}
+
+.login_button a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    margin: 10px;
+}
+
+.login_button a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.signup_button {
+    display: inline-block;
+    text-align: center;
+    background-color: #6F89CB;
+    font-size: 150%;
+    width: 10%;
+}
+
+.signup_button:hover {
+    background-color: #88a6f3;
+}
+
+.signup_button a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    margin: 10px;
+}
+
+.signup_button a:hover {
+    text-decoration: none;
+    color: black;
+}

@@ -10,6 +10,7 @@ import Wishlist from "../wishlist/index";
 import DeleteAccount from "../delete-account/index";
 import Login from "../login/index";
 import AddNewMedia from "../add-new-media/index";
+import Welcome from "../welcome/index";
 
 export default function App() {
   return (
@@ -52,6 +53,9 @@ export default function App() {
         </nav>
 
         <Switch>
+          <Route path="/welcome">
+            <Welcome />
+          </Route>
           <Route path="/library">
             <Library />
           </Route>
