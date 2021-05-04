@@ -1,0 +1,55 @@
+.delete_body {
+    padding-top: 10%;
+    text-align: center;
+}
+
+.delete_message {
+    font-size: 200%;
+}
+
+.delete_confirm {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 200%;
+    margin-top: 5%;
+}
+
+.delete_confirm a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    margin: 10px;
+    margin-bottom: 0;
+    background-color: rgb(255, 70, 70);
+    width: 10%;
+}
+
+.delete_confirm a:hover {
+    text-decoration: none;
+    color: black;
+    background-color: rgb(253, 158, 158);
+}
+
+.delete_cancel {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 200%;
+}
+
+.delete_cancel a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    margin: 10px;
+    margin-top: 2.5%;
+    background-color: #6F89CB;
+    width: 10%;
+}
+
+.delete_cancel a:hover {
+    text-decoration: none;
+    color: black;
+    background-color: #88a6f3;
+}
