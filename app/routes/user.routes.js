@@ -6,6 +6,9 @@ module.exports = app => {
   // Create a new user
   router.post("/", user.createUser);
 
+  // Delete a user
+  router.delete("/:username", user.deleteUser);
+
   // Get all users
   router.get("/", user.findAll);
 

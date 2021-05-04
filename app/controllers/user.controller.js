@@ -31,6 +31,31 @@ exports.createUser = (req, res) => {
     });
 };
 
+// Delete User
+exports.deleteUser = (req, res) => {
+  const username = req.params.username;
+
+  User.destroy({
+    where: { username : username }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "User was deleted successfully!"
+        });
+      } else {
+        res.send({
+          message: `Cannot delete user with username=${username}`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete user with username=" + username
+      });
+    });
+};
+
 // Get All Users
 exports.findAll = (req, res) => {
   const title = req.query.title;
