@@ -11,6 +11,7 @@ import DeleteAccount from "../delete-account/index";
 import Login from "../login/index";
 import AddNewMedia from "../add-new-media/index";
 import Welcome from "../welcome/index";
+import Signup from "../signup/index"
 
 export default function App() {
   return (
@@ -67,6 +68,9 @@ export default function App() {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/signup">
+            <Signup />
           </Route>
           <Route path="/add-new-media">
             <AddNewMedia />

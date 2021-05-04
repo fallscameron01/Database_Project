@@ -1,0 +1,14 @@
+.signup_form {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 150%;
+    margin-top: 10%;
+}
+
+.signup_form label {
+    margin: 1%;
+}
+.signup_form input {
+    margin: 1%;
+}

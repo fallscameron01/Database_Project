@@ -2,7 +2,6 @@ import React from "react";
 import "./index.css";
 
 function Login() {
-
   const handleSubmit = () => {
     // this is where I would put code to log in.
     // IF I HAD ANY!
