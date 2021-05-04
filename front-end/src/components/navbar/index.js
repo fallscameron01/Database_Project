@@ -3,7 +3,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from "react-router-dom";
 import Library from "../library/index";
 import Wishlist from "../wishlist/index";
@@ -54,6 +55,9 @@ export default function App() {
         </nav>
 
         <Switch>
+          <Route exact path="/">
+              <Redirect to="/welcome" />
+          </Route>
           <Route path="/welcome">
             <Welcome />
           </Route>
