@@ -19,6 +19,26 @@ class UserDataService {
       console.log(error);
     });
   }
+
+  async getUser(username) {
+    var config = {
+      method: 'get',
+      url: `http://localhost:8080/api/user/${username}`,
+      headers: { 
+        'Content-Type': 'application/json'
+      }
+    };
+    
+    const res = await axios(config)
+    .then(function (response) {
+      return (JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+    return await res;
+  }
 }
 
 export default new UserDataService();

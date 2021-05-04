@@ -72,3 +72,19 @@ exports.findAll = (req, res) => {
       });
     });
 };
+
+// Find User
+exports.findUser = (req, res) => {
+  const username = req.params.username;
+
+  User.findByPk(username)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials."
+      });
+    });
+};

@@ -3,7 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { setGlobal } from 'reactn';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+setGlobal({
+  username: "",
+  password: ""
+});
 
 ReactDOM.render(
   <React.StrictMode>

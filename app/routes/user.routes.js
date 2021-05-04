@@ -12,5 +12,8 @@ module.exports = app => {
   // Get all users
   router.get("/", user.findAll);
 
+  // Login
+  router.get("/:username", user.findUser);
+
   app.use('/api/user', router);
 };
