@@ -1,0 +1,14 @@
+.login_form {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 150%;
+    margin-top: 10%;
+}
+
+.login_form label {
+    margin: 1%;
+}
+.login_form input {
+    margin: 1%;
+}

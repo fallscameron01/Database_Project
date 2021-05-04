@@ -9,7 +9,7 @@ function Welcome() {
         <div class="login_button">
           <a href="login">Log In</a>
         </div>
-        <div></div>
+        <div/>
         <div class="signup_button">
           <a href="signup">Sign Up</a>
         </div>
