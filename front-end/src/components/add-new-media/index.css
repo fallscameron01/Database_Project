@@ -1,0 +1,36 @@
+.new_media_body {
+    margin-bottom: 10%;
+}
+
+.new_media_message {
+    padding-left: 2.5%;
+    padding-top: 2.5%;
+    font-size: 200%;
+    text-align: center;
+}
+
+.new_media_form {
+    display: flex;
+    justify-content: center;
+    font-size: 150%;
+    margin-top: 5%;
+}
+
+.new_media_form label {
+    margin: 1%;
+}
+
+.new_media_form select {
+    margin: 1%;
+}
+
+.new_media_form input {
+    margin: 1%;
+    width: 115%;
+}
+
+.new_media_form textarea {
+    font-size: 12pt;
+    margin: 1%;
+    width: 115%;
+}
