@@ -14,7 +14,13 @@ function AddNewMedia() {
       </div>
       <div class="new_media_form">
         <form onSubmit={handleSubmit}>
-          <label>Media Type:</label><div/>
+          <label>Add To:</label>
+          <select>
+            <option value="to_library">Library</option>
+            <option value="to_wishlist">Wishlist</option>
+          </select><div/>
+
+          <label>Media Type:</label>
           <select>
             <option value="video_game">Video Game</option>
             <option value="movie">Movie</option>
@@ -22,16 +28,16 @@ function AddNewMedia() {
             <option value="book">Book</option>
           </select><div/>
 
-          <label>Title:</label><div/>
+          <label>Title:</label>
           <input type="text" name="title"/><div/>
 
-          <label>Artist:</label><div/>
+          <label>Artist:</label>
           <input type="text" name="artist"/><div/>
 
-          <label>Image Link:</label><div/>
+          <label>Image Link:</label>
           <input type="text" name="image_link"/><div/>
 
-          <label>Description:</label><div/>
+          <label>Description:</label>
           <textarea name="description">Enter the description here.</textarea><div/>
           
           <label>Platform Name:</label>
