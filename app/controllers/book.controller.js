@@ -6,7 +6,7 @@ const Op = db.Sequelize.Op;
 
 // Add book
 exports.addBook = (req, res) => {
-  const location = req.params.loaction;
+  const location = req.params.location;
 
   // Validate request
   if (!req.body.title) {

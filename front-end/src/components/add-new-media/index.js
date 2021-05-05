@@ -1,10 +1,35 @@
 import React from "react";
 import "./index.css";
+import { useGlobal } from "reactn";
+import BookDataService from "../../services/book.service";
 
 function AddNewMedia() {
-  const handleSubmit = () => {
-    // this is where I would put code to create the media.
-    // IF I HAD ANY!
+  const [username] = useGlobal("username");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const location = document.getElementById("location").value;
+    const type = document.getElementById("type").value;
+    const title = document.getElementById("title").value;
+    const artist = document.getElementById("artist").value;
+    const image_link = document.getElementById("image_link").value;
+    const description = document.getElementById("description").value;
+    const platform_name = document.getElementById("platform_name").value;
+    const platform_link = document.getElementById("platform_link").value;
+
+    console.log(type);
+    if (location === "to_library") {
+      if (type === "book") {
+        const obj = { username, title, "cover_art": image_link, "author": artist};
+        BookDataService.addBookToLibrary(obj);
+      }
+    }
+    else {
+      if (type === "book") {
+        
+      }
+    }
   };
   
   return (
@@ -15,13 +40,13 @@ function AddNewMedia() {
       <div class="new_media_form">
         <form onSubmit={handleSubmit}>
           <label>Add To:</label>
-          <select>
+          <select id="location">
             <option value="to_library">Library</option>
             <option value="to_wishlist">Wishlist</option>
           </select><div/>
 
           <label>Media Type:</label>
-          <select>
+          <select id="type">
             <option value="video_game">Video Game</option>
             <option value="movie">Movie</option>
             <option value="music">Music</option>
@@ -29,22 +54,22 @@ function AddNewMedia() {
           </select><div/>
 
           <label>Title:</label>
-          <input type="text" name="title"/><div/>
+          <input type="text" name="title" id="title" /><div/>
 
           <label>Artist:</label>
-          <input type="text" name="artist"/><div/>
+          <input type="text" name="artist" id="artist" /><div/>
 
           <label>Image Link:</label>
-          <input type="text" name="image_link"/><div/>
+          <input type="text" name="image_link" id="image_link" /><div/>
 
           <label>Description:</label>
-          <textarea name="description">Enter the description here.</textarea><div/>
+          <textarea name="description" id="description">Enter the description here.</textarea><div/>
           
           <label>Platform Name:</label>
-          <input type="text" name="platform_name"></input><div/>
+          <input type="text" name="platform_name" id="platform_name"></input><div/>
 
           <label>Platform Link:</label>
-          <input type="text" name="platform_link"></input><div/>
+          <input type="text" name="platform_link" id="platform_link"></input><div/>
 
           <input type="submit" value="Done"/>
         </form>

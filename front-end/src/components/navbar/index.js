@@ -14,12 +14,15 @@ import AddNewMedia from "../add-new-media/index";
 import Welcome from "../welcome/index";
 import Signup from "../signup/index";
 import "./index.css";
+import { useGlobal } from "reactn";
 
 export default function App() {
+  const [username] = useGlobal("username");
+
   return (
     <Router>
       <div>
-        <nav style={{backgroundColor: "#6F89CB"}} className="navbar navbar-expand-lg">
+        <nav style={{backgroundColor: "#6F89CB", display: (username !== "") ? "" : "none"}} className="navbar navbar-expand-lg">
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item active">
