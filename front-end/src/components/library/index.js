@@ -131,19 +131,19 @@ function Library() {
     event.preventDefault();
     if (formType === "book") {
       const obj = { username, "title": current.title, "cover_art": current.image_link, "author": current.author, "platform_name": current.platform_name, "platform_link": current.platform_link };
-      BookDataService.addBookToLibrary(obj);
+      BookDataService.modifyBook(current.title, obj);
     }
     else if (formType === "movie") {
       const obj = { username, "title": current.title, "box_art": current.image_link, "description": current.description, "platform_name": current.platform_name, "platform_link": current.platform_link };
-      MovieDataService.addMovieToLibrary(obj);
+      MovieDataService.modifyMovie(current.title, obj);
     }
     else if (formType === "music") {
       const obj = { username, "title": current.title, "album_art": current.image_link, "artist": current.artist, "genre": current.genre, "platform_name": current.platform_name, "platform_link": current.platform_link };
-      MusicDataService.addMusicToLibrary(obj);
+      MusicDataService.modifyMusic(current.title, obj);
     }
     else if (formType === "video_game") {
       const obj = { username, "title": current.title, "box_art": current.image_link, "description": current.description, "platform_name": current.platform_name, "platform_link": current.platform_link };
-      VideoGameDataService.addVideoGameToLibrary(obj);
+      VideoGameDataService.modifyVideoGame(current.title, obj);
     }
     hideModal();
   };

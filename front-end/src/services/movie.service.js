@@ -78,6 +78,25 @@ class MovieDataService {
 
     return await res;
   }
+
+  modifyMovie(title, data) {
+    var config = {
+      method: 'put',
+      url: `http://localhost:8080/api/movie/${title}`,
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
 }
 
 export default new MovieDataService();
