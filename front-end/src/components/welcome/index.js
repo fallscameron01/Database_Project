@@ -4,7 +4,7 @@ import "./index.css";
 function Welcome() {
   return (
       <div class="welcome_body">
-        <p class="welcome_message">Welcome to the Video Game Management Tool!</p>
+        <p class="welcome_message">Welcome to the Media Management Tool!</p>
 
         <div class="login_button">
           <a href="login">Log In</a>

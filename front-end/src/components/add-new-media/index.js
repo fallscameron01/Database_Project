@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./index.css";
 import { useGlobal } from "reactn";
 import BookDataService from "../../services/book.service";
@@ -8,6 +8,11 @@ import VideoGameDataService from "../../services/video_game.service";
 
 function AddNewMedia() {
   const [username] = useGlobal("username");
+  const [type, setType] = useState("video_game");
+
+  const handleType = () => {
+    setType(document.getElementById("type").value);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -73,30 +78,49 @@ function AddNewMedia() {
           </select><div/>
 
           <label>Media Type:</label>
-          <select id="type">
+          <select id="type" onChange={handleType}>
             <option value="video_game">Video Game</option>
             <option value="movie">Movie</option>
             <option value="music">Music</option>
             <option value="book">Book</option>
           </select><div/>
+          <div>
+            <label>Title:</label>
+            <input type="text" name="title" id="title" /><div/>
+          </div>
 
-          <label>Title:</label>
-          <input type="text" name="title" id="title" /><div/>
+          <div style={{display: (type === "music" || type === "book") ? "" : "none"}}>
+            <label style={{display: (type === "music") ? "" : "none"}}>Artist:</label>
+            <label style={{display: (type === "book") ? "" : "none"}}>Author:</label>
+            <input type="text" name="artist" id="artist" /><div/>
+          </div>
 
-          <label>Artist:</label>
-          <input type="text" name="artist" id="artist" /><div/>
+          <div>
+            <label style={{display: (type === "video_game" || type === "movie") ? "" : "none"}}>Box Art Link:</label>
+            <label style={{display: (type === "music") ? "" : "none"}}>Album Art Link:</label>
+            <label style={{display: (type === "book") ? "" : "none"}}>Cover Art Link:</label>
+            <input type="text" name="image_link" id="image_link" /><div/>
+          </div>
 
-          <label>Image Link:</label>
-          <input type="text" name="image_link" id="image_link" /><div/>
+          <div style={{display: (type === "video_game" || type === "movie") ? "" : "none"}}>
+            <label>Description:</label>
+            <textarea name="description" id="description">Enter the description here.</textarea><div/>
+          </div>
 
-          <label>Description:</label>
-          <textarea name="description" id="description">Enter the description here.</textarea><div/>
-          
-          <label>Platform Name:</label>
-          <input type="text" name="platform_name" id="platform_name"></input><div/>
+          <div style={{display: (type === "music") ? "" : "none"}}>
+            <label>Genre:</label>
+            <input type="text" name="genre" id="genre" /><div/>
+          </div>
 
-          <label>Platform Link:</label>
-          <input type="text" name="platform_link" id="platform_link"></input><div/>
+          <div>
+            <label>Platform Name:</label>
+            <input type="text" name="platform_name" id="platform_name"></input><div/>
+          </div>
+
+          <div>
+            <label>Platform Link:</label>
+            <input type="text" name="platform_link" id="platform_link"></input><div/>
+          </div>
 
           <input type="submit" value="Done"/>
         </form>

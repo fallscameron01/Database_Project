@@ -17,7 +17,13 @@ import "./index.css";
 import { useGlobal } from "reactn";
 
 export default function App() {
-  const [username] = useGlobal("username");
+  const [username, setUsername] = useGlobal("username");
+  const [, setPassword] = useGlobal("password");
+
+  const handleSignOut = () => {
+    setUsername("");
+    setPassword("");
+  };
 
   return (
     <Router>
@@ -51,7 +57,7 @@ export default function App() {
               </li>
               <li>
                 <Link to="/login">
-                  <a class="nav-link" href="#">Sign Out</a>
+                  <a class="nav-link" href="#" onClick={handleSignOut}>Sign Out</a>
                 </Link>
               </li>
             </ul>
