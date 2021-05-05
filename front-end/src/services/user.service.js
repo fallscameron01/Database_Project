@@ -39,6 +39,25 @@ class UserDataService {
 
     return await res;
   }
+
+  delete(username) {
+    var config = {
+      method: 'delete',
+      url: `http://localhost:8080/api/user/${username}`,
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      username : username
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
 }
 
 export default new UserDataService();
