@@ -9,7 +9,9 @@ var corsOptions = {
 };
 
 const db = require("./app/models");
-db.sequelize.sync();
+db.sequelize.sync({ force: true }).then(() => {
+  console.log("Drop and re-sync db.");
+});
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
@@ -24,6 +26,7 @@ require("./app/routes/user.routes")(app);
 require("./app/routes/book.routes")(app);
 require("./app/routes/movie.routes")(app);
 require("./app/routes/music.routes")(app);
+require("./app/routes/video_game.routes")(app);
 
 // Port
 const PORT = process.env.PORT || 8080;

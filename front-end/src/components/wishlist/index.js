@@ -3,6 +3,7 @@ import { useGlobal } from "reactn";
 import BookDataService from "../../services/book.service";
 import MovieDataService from "../../services/movie.service";
 import MusicDataService from "../../services/music.service";
+import VideoGameDataService from "../../services/video_game.service";
 import addNew from "./images/add-new.PNG";
 import "./index.css";
 
@@ -31,7 +32,7 @@ function Wishlist() {
       setSort(sort);
     });
 
-    MovieDataService.getAllMovies("library").then(movies => {
+    MovieDataService.getAllMovies("wishlist").then(movies => {
       let temp = JSON.parse(movies);
       
       for (let i = 0; i < temp.length; i++) {
@@ -47,7 +48,7 @@ function Wishlist() {
       setSort(sort);
     });
 
-    MusicDataService.getAllMusics("library").then(musics => {
+    MusicDataService.getAllMusics("wishlist").then(musics => {
       let temp = JSON.parse(musics);
       
       for (let i = 0; i < temp.length; i++) {
@@ -55,6 +56,22 @@ function Wishlist() {
           MusicDataService.getMusic(temp[i].title).then(singleMusic => {
             singleMusic = JSON.parse(singleMusic);
             list.push({ "title": singleMusic.title, "album_art": singleMusic.album_art, "artist": singleMusic.artist, "type": "Music" });
+          });
+        }
+      }
+    }).finally(() => {
+      data = list;
+      setSort(sort);
+    });
+
+    VideoGameDataService.getAllVideoGames("wishlist").then(video_game => {
+      let temp = JSON.parse(video_game);
+      
+      for (let i = 0; i < temp.length; i++) {
+        if (temp[i].username === username) {
+          VideoGameDataService.getVideoGame(temp[i].title).then(singleVideoGame => {
+            singleVideoGame = JSON.parse(singleVideoGame);
+            list.push({ "title": singleVideoGame.title, "box_art": singleVideoGame.box_art, "description": singleVideoGame.description, "type": "Video Game" });
           });
         }
       }

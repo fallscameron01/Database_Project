@@ -4,6 +4,7 @@ import { useGlobal } from "reactn";
 import BookDataService from "../../services/book.service";
 import MovieDataService from "../../services/movie.service";
 import MusicDataService from "../../services/music.service";
+import VideoGameDataService from "../../services/video_game.service";
 
 function AddNewMedia() {
   const [username] = useGlobal("username");
@@ -33,6 +34,10 @@ function AddNewMedia() {
         const obj = { username, title, "album_art": image_link, "artist": artist};
         MusicDataService.addMusicToLibrary(obj);
       }
+      else if (type === "video_game") {
+        const obj = { username, title, "box_art": image_link, "description": description};
+        VideoGameDataService.addVideoGameToLibrary(obj);
+      }
     }
     else {
       if (type === "book") {
@@ -46,6 +51,10 @@ function AddNewMedia() {
       else if (type === "music") {
         const obj = { username, title, "album_art": image_link, "artist": artist};
         MusicDataService.addMusicToLibrary(obj);
+      }
+      else if (type === "video_game") {
+        const obj = { username, title, "box_art": image_link, "description": description};
+        VideoGameDataService.addVideoGameToLibrary(obj);
       }
     }
   };
