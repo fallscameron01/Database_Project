@@ -4,7 +4,7 @@ class MovieDataService {
   addMovieToLibrary(data) {
     var config = {
       method: 'post',
-      url: 'http://localhost:8080/api/book/library',
+      url: 'http://localhost:8080/api/movie/library',
       headers: { 
         'Content-Type': 'application/json'
       },
@@ -23,7 +23,7 @@ class MovieDataService {
   addMovieToWishlist(data) {
     var config = {
       method: 'post',
-      url: 'http://localhost:8080/api/book/wishlist',
+      url: 'http://localhost:8080/api/movie/wishlist',
       headers: { 
         'Content-Type': 'application/json'
       },
@@ -42,7 +42,7 @@ class MovieDataService {
   async getAllMovies(location) {
     var config = {
       method: 'get',
-      url: `http://localhost:8080/api/book/${location}`,
+      url: `http://localhost:8080/api/movie/${location}`,
       headers: { 
         'Content-Type': 'application/json'
       }
@@ -62,7 +62,7 @@ class MovieDataService {
   async getMovie(title) {
     var config = {
       method: 'get',
-      url: `http://localhost:8080/api/book/${title}`,
+      url: `http://localhost:8080/api/movie/${title}`,
       headers: { 
         'Content-Type': 'application/json'
       }

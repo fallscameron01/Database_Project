@@ -4,7 +4,7 @@ class VideoGameDataService {
   addVideoGameToLibrary(data) {
     var config = {
       method: 'post',
-      url: 'http://localhost:8080/api/book/library',
+      url: 'http://localhost:8080/api/video_game/library',
       headers: { 
         'Content-Type': 'application/json'
       },
@@ -23,7 +23,7 @@ class VideoGameDataService {
   addVideoGameToWishlist(data) {
     var config = {
       method: 'post',
-      url: 'http://localhost:8080/api/book/wishlist',
+      url: 'http://localhost:8080/api/video_game/wishlist',
       headers: { 
         'Content-Type': 'application/json'
       },
@@ -42,7 +42,7 @@ class VideoGameDataService {
   async getAllVideoGames(location) {
     var config = {
       method: 'get',
-      url: `http://localhost:8080/api/book/${location}`,
+      url: `http://localhost:8080/api/video_game/${location}`,
       headers: { 
         'Content-Type': 'application/json'
       }
@@ -62,7 +62,7 @@ class VideoGameDataService {
   async getVideoGame(title) {
     var config = {
       method: 'get',
-      url: `http://localhost:8080/api/book/${title}`,
+      url: `http://localhost:8080/api/video_game/${title}`,
       headers: { 
         'Content-Type': 'application/json'
       }

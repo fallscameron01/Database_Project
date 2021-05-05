@@ -4,7 +4,7 @@ class MusicDataService {
   addMusicToLibrary(data) {
     var config = {
       method: 'post',
-      url: 'http://localhost:8080/api/book/library',
+      url: 'http://localhost:8080/api/music/library',
       headers: { 
         'Content-Type': 'application/json'
       },
@@ -23,7 +23,7 @@ class MusicDataService {
   addMusicToWishlist(data) {
     var config = {
       method: 'post',
-      url: 'http://localhost:8080/api/book/wishlist',
+      url: 'http://localhost:8080/api/music/wishlist',
       headers: { 
         'Content-Type': 'application/json'
       },
@@ -42,7 +42,7 @@ class MusicDataService {
   async getAllMusics(location) {
     var config = {
       method: 'get',
-      url: `http://localhost:8080/api/book/${location}`,
+      url: `http://localhost:8080/api/music/${location}`,
       headers: { 
         'Content-Type': 'application/json'
       }
@@ -62,7 +62,7 @@ class MusicDataService {
   async getMusic(title) {
     var config = {
       method: 'get',
-      url: `http://localhost:8080/api/book/${title}`,
+      url: `http://localhost:8080/api/music/${title}`,
       headers: { 
         'Content-Type': 'application/json'
       }
