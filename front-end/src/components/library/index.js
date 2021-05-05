@@ -1,46 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import addNew from "./images/add-new.PNG";
 import BookDataService from "../../services/book.service";
+import { useGlobal } from "reactn";
 
-// This is hardcoded data for now
-// We will get this data from the database using an API call
-const data = [
-  {
-    title: "Halo",
-    box_art: "https://www.mobygames.com/images/covers/l/9494-halo-combat-evolved-xbox-front-cover.jpg",
-    description: "Shooter Video Game",
-    type: "Video Game"
-  },
-  {
-    title: "Call of Duty",
-    box_art: "https://upload.wikimedia.org/wikipedia/en/f/fd/Call_of_Duty_-_Infinite_Warfare_%28promo_image%29.jpg",
-    description: "Shooter Video Game",
-    type: "Video Game"
-  },
-  {
-    title: "Rocket League",
-    box_art: "https://images-na.ssl-images-amazon.com/images/I/71mzNfoyPUL._SL1000_.jpg",
-    description: "Car Video Game",
-    type: "Video Game"
-  },
-  {
-    title: "Harry Potter",
-    box_art: "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/3406/34068479_so.jpg",
-    description: "Wizard dude does some cool stuff",
-    type: "Movie"
-  }
-];
-
-const good = BookDataService.getAllBooks("library");
+let data = [];
 
 function Library() {
   const [type, setType] = useState("All");
   const [sort, setSort] = useState("alphabetical");
+  const [username] = useGlobal("username");
+
+  useEffect(() => {
+    let list = [];
+    BookDataService.getAllBooks("library").then(books => {
+      let temp = JSON.parse(books);
+      
+      for (let i = 0; i < temp.length; i++) {
+        if (temp[i].username === username) {
+          BookDataService.getBook(temp[i].title).then(singleBook => {
+            singleBook = JSON.parse(singleBook);
+            list.push({ "title": singleBook.title, "box_art": singleBook.cover_art, "author": singleBook.author, "type": "Book" });
+          });
+        }
+      }
+    }).finally(() => {
+      data = list;
+      setSort(sort);
+    });
+  });
 
   const handleType = () => {
     const value = document.getElementById("types");
     setType(value.value);
-    console.log(good);
   };
 
   const handleSort = () => {

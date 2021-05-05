@@ -4,10 +4,8 @@ const InBookLibrary = db.in_book_library;
 const InBookWishlist = db.in_book_wishlist;
 const Op = db.Sequelize.Op;
 
-// Add book
-exports.addBook = (req, res) => {
-  const location = req.params.location;
-
+// Add book to library
+exports.addBookToLibrary = (req, res) => {
   // Validate request
   if (!req.body.title) {
     res.status(400).send({
@@ -41,60 +39,89 @@ exports.addBook = (req, res) => {
     title: req.body.title
   };
 
-  if (location === "library") {
-    InBookLibrary.create(book_location)
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the user."
-      });
+  InBookLibrary.create(book_location)
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while creating the user."
     });
-  }
-  else {
-    InBookWishlist.create(book_location)
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the user."
-      });
-    });
-  }
+  });
 };
 
-// Find all books
-exports.findAllBooks = (req, res) => {
-  const location = req.params.location;
-  
-  if (location === "library") {
-    InBookLibrary.findAll()
+// Add book to Wishlist
+exports.addBookToWishlist = (req, res) => {
+  // Validate request
+  if (!req.body.title) {
+    res.status(400).send({
+      message: "Content can not be empty!"
+    });
+    return;
+  }
+
+  const book = {
+    title: req.body.title,
+    cover_art: req.body.cover_art,
+    author: req.body.author
+  };
+
+  // Save User in the database
+  Book.create(book)
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving tutorials."
+          err.message || "Some error occurred while creating the user."
       });
     });
-  }
-  else {
-    InBookWishlist.findAll()
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving tutorials."
-      });
+
+  const book_location = {
+    username: req.body.username,
+    title: req.body.title
+  };
+
+  InBookWishlist.create(book_location)
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while creating the user."
     });
-  }
+  });
+};
+
+// Find all books in Library
+exports.findAllBooksInLibrary = (req, res) => {  
+  InBookLibrary.findAll()
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while retrieving tutorials."
+    });
+  });
+};
+
+// Find all books in Wishlist
+exports.findAllBooksInWishlist = (req, res) => {  
+  InBookWishlist.findAll()
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while retrieving tutorials."
+    });
+  });
 };
 
 // Find Book

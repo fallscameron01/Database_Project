@@ -4,16 +4,19 @@ module.exports = app => {
   var router = require("express").Router();
 
   // Add book to library
-  router.post("/:library", book.addBook);
+  router.post("/library", book.addBookToLibrary);
 
   // Add book to wishlist
-  router.post("/:wishlist", book.addBook);
+  router.post("/wishlist", book.addBookToWishlist);
 
   // Modify book
   router.put("/:title", book.update);
 
-  // Get all books
-  router.get("/:location", book.findAllBooks);
+  // Get all books in library
+  router.get("/library", book.findAllBooksInLibrary);
+
+  // Get all books in library
+  router.get("/wishlist", book.findAllBooksInWishlist);
 
   // Find book by title
   router.get("/:title", book.findBook);

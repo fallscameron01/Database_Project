@@ -1,39 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useGlobal } from "reactn";
+import BookDataService from "../../services/book.service";
 import addNew from "./images/add-new.PNG";
 import "./index.css";
 
-// This is hardcoded data for now
-// We will get this data from the database using an API call
-const data = [
-  {
-    title: "Fall Guys",
-    box_art: "https://upload.wikimedia.org/wikipedia/en/5/5e/Fall_Guys_cover.jpg",
-    description: "You fall",
-    type: "Video Game"
-  },
-  {
-    title: "Goodnight Moon",
-    box_art: "https://prodimage.images-bn.com/pimages/9780062573094_p0_v1_s550x406.jpg",
-    description: "The moon goes to bed",
-    type: "Book"
-  },
-  {
-    title: "Tenet",
-    box_art: "https://m.media-amazon.com/images/M/MV5BYzg0NGM2NjAtNmIxOC00MDJmLTg5ZmYtYzM0MTE4NWE2NzlhXkEyXkFqcGdeQXVyMTA4NjE0NjEy._V1_.jpg",
-    description: "A movie that will make no sense",
-    type: "Movie"
-  },
-  {
-    title: "Dark Side of the Moon",
-    box_art: "https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png",
-    description: "Good stuff",
-    type: "Music"
-  }
-];
+let data = [];
 
 function Wishlist() {
   const [type, setType] = useState("All");
   const [sort, setSort] = useState("alphabetical");
+  const [username] = useGlobal("username");
+
+  useEffect(() => {
+    let list = [];
+    BookDataService.getAllBooks("wishlist").then(books => {
+      let temp = JSON.parse(books);
+      
+      for (let i = 0; i < temp.length; i++) {
+        if (temp[i].username === username) {
+          BookDataService.getBook(temp[i].title).then(singleBook => {
+            singleBook = JSON.parse(singleBook);
+            list.push({ "title": singleBook.title, "box_art": singleBook.cover_art, "author": singleBook.author, "type": "Book" });
+          });
+        }
+      }
+    }).finally(() => {
+      data = list;
+      setSort(sort);
+    });
+  });
 
   const handleType = () => {
     const value = document.getElementById("types");
