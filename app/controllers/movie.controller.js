@@ -18,8 +18,10 @@ exports.addMovie = (req, res) => {
 
   const movie = {
     title: req.body.title,
-    cover_art: req.body.cover_art,
-    author: req.body.author
+    box_art: req.body.box_art,
+    description: req.body.description,
+    platform_name: req.body.platform_name,
+    platform_link: req.body.platform_link
   };
 
   // Save Movie in the database

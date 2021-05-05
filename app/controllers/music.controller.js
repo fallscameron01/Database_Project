@@ -18,8 +18,11 @@ exports.addMusic = (req, res) => {
 
   const music = {
     title: req.body.title,
-    cover_art: req.body.cover_art,
-    author: req.body.author
+    album_art: req.body.album_art,
+    artist: req.body.artist,
+    platform_name: req.body.platform_name,
+    platform_link: req.body.platform_link,
+    genre: req.body.genre
   };
 
   // Save Music in the database
