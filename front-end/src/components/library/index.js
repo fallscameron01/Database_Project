@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import addNew from "./images/add-new.PNG";
 import BookDataService from "../../services/book.service";
 import MovieDataService from "../../services/movie.service";
+import MusicDataService from "../../services/music.service";
 import { useGlobal } from "reactn";
 
 let data = [];
@@ -37,6 +38,22 @@ function Library() {
           MovieDataService.getMovie(temp[i].title).then(singleMovie => {
             singleMovie = JSON.parse(singleMovie);
             list.push({ "title": singleMovie.title, "box_art": singleMovie.box_art, "description": singleMovie.decription, "type": "Movie" });
+          });
+        }
+      }
+    }).finally(() => {
+      data = list;
+      setSort(sort);
+    });
+
+    MusicDataService.getAllMusics("library").then(musics => {
+      let temp = JSON.parse(musics);
+      
+      for (let i = 0; i < temp.length; i++) {
+        if (temp[i].username === username) {
+          MusicDataService.getMusic(temp[i].title).then(singleMusic => {
+            singleMusic = JSON.parse(singleMusic);
+            list.push({ "title": singleMusic.title, "album_art": singleMusic.album_art, "artist": singleMusic.artist, "type": "Music" });
           });
         }
       }

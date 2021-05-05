@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useGlobal } from "reactn";
 import BookDataService from "../../services/book.service";
+import MovieDataService from "../../services/movie.service";
+import MusicDataService from "../../services/music.service";
 import addNew from "./images/add-new.PNG";
 import "./index.css";
 
@@ -21,6 +23,38 @@ function Wishlist() {
           BookDataService.getBook(temp[i].title).then(singleBook => {
             singleBook = JSON.parse(singleBook);
             list.push({ "title": singleBook.title, "box_art": singleBook.cover_art, "author": singleBook.author, "type": "Book" });
+          });
+        }
+      }
+    }).finally(() => {
+      data = list;
+      setSort(sort);
+    });
+
+    MovieDataService.getAllMovies("library").then(movies => {
+      let temp = JSON.parse(movies);
+      
+      for (let i = 0; i < temp.length; i++) {
+        if (temp[i].username === username) {
+          MovieDataService.getMovie(temp[i].title).then(singleMovie => {
+            singleMovie = JSON.parse(singleMovie);
+            list.push({ "title": singleMovie.title, "box_art": singleMovie.box_art, "description": singleMovie.decription, "type": "Movie" });
+          });
+        }
+      }
+    }).finally(() => {
+      data = list;
+      setSort(sort);
+    });
+
+    MusicDataService.getAllMusics("library").then(musics => {
+      let temp = JSON.parse(musics);
+      
+      for (let i = 0; i < temp.length; i++) {
+        if (temp[i].username === username) {
+          MusicDataService.getMusic(temp[i].title).then(singleMusic => {
+            singleMusic = JSON.parse(singleMusic);
+            list.push({ "title": singleMusic.title, "album_art": singleMusic.album_art, "artist": singleMusic.artist, "type": "Music" });
           });
         }
       }

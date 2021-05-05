@@ -4,10 +4,8 @@ const InMusicLibrary = db.in_music_library;
 const InMusicWishlist = db.in_music_wishlist;
 const Op = db.Sequelize.Op;
 
-// Add music
-exports.addMusic = (req, res) => {
-  const location = req.params.location;
-
+// Add music to library
+exports.addMusicToLibrary = (req, res) => {
   // Validate request
   if (!req.body.title) {
     res.status(400).send({
@@ -19,13 +17,10 @@ exports.addMusic = (req, res) => {
   const music = {
     title: req.body.title,
     album_art: req.body.album_art,
-    artist: req.body.artist,
-    platform_name: req.body.platform_name,
-    platform_link: req.body.platform_link,
-    genre: req.body.genre
+    artist: req.body.artist
   };
 
-  // Save Music in the database
+  
   Music.create(music)
     .then(data => {
       res.send(data);
@@ -33,7 +28,7 @@ exports.addMusic = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the music."
+          err.message || "Some error occurred while creating the user."
       });
     });
 
@@ -42,60 +37,88 @@ exports.addMusic = (req, res) => {
     title: req.body.title
   };
 
-  if (location === "library") {
-    InMusicLibrary.create(music_location)
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the music."
-      });
+  InMusicLibrary.create(music_location)
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while creating the user."
     });
-  }
-  else {
-    InMusicWishlist.create(music_location)
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the music."
-      });
-    });
-  }
+  });
 };
 
-// Find all musics
-exports.findAllMusics = (req, res) => {
-  const location = req.params.location;
-  
-  if (location === "library") {
-    InMusicLibrary.findAll()
+// Add music to Wishlist
+exports.addMusicToWishlist = (req, res) => {
+  // Validate request
+  if (!req.body.title) {
+    res.status(400).send({
+      message: "Content can not be empty!"
+    });
+    return;
+  }
+
+  const music = {
+    title: req.body.title,
+    album_art: req.body.album_art,
+    artist: req.body.artist
+  };
+
+  Music.create(music)
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving tutorials."
+          err.message || "Some error occurred while creating the user."
       });
     });
-  }
-  else {
-    InMusicWishlist.findAll()
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving tutorials."
-      });
+
+  const music_location = {
+    username: req.body.username,
+    title: req.body.title
+  };
+
+  InMusicWishlist.create(music_location)
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while creating the user."
     });
-  }
+  });
+};
+
+// Find all musics in Library
+exports.findAllMusicsInLibrary = (req, res) => {  
+  InMusicLibrary.findAll()
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while retrieving tutorials."
+    });
+  });
+};
+
+// Find all musics in Wishlist
+exports.findAllMusicsInWishlist = (req, res) => {  
+  InMusicWishlist.findAll()
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while retrieving tutorials."
+    });
+  });
 };
 
 // Find Music
@@ -114,7 +137,7 @@ exports.findMusic = (req, res) => {
     });
 };
 
-// Modify music
+// Modify Music
 exports.update = (req, res) => {
   const title = req.params.title;
 
