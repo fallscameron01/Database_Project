@@ -17,7 +17,9 @@ exports.addVideoGameToLibrary = (req, res) => {
   const video_game = {
     title: req.body.title,
     box_art: req.body.box_art,
-    description: req.body.description
+    description: req.body.description,
+    platform_name: req.body.platform_name,
+    platform_link: req.body.platform_link
   };
 
   
@@ -62,7 +64,9 @@ exports.addVideoGameToWishlist = (req, res) => {
   const video_game = {
     title: req.body.title,
     box_art: req.body.box_art,
-    description: req.body.description
+    description: req.body.description,
+    platform_name: req.body.platform_name,
+    platform_link: req.body.platform_link
   };
 
   VideoGame.create(video_game)

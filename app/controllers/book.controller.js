@@ -64,7 +64,9 @@ exports.addBookToWishlist = (req, res) => {
   const book = {
     title: req.body.title,
     cover_art: req.body.cover_art,
-    author: req.body.author
+    author: req.body.author,
+    platform_name: req.body.platform_name,
+    platform_link: req.body.platform_link
   };
 
   // Save User in the database

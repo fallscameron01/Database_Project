@@ -17,7 +17,10 @@ exports.addMusicToLibrary = (req, res) => {
   const music = {
     title: req.body.title,
     album_art: req.body.album_art,
-    artist: req.body.artist
+    artist: req.body.artist,
+    genre: req.body.genre,
+    platform_name: req.body.platform_name,
+    platform_link: req.body.platform_link
   };
 
   
@@ -62,7 +65,10 @@ exports.addMusicToWishlist = (req, res) => {
   const music = {
     title: req.body.title,
     album_art: req.body.album_art,
-    artist: req.body.artist
+    artist: req.body.artist,
+    genre: req.body.genre,
+    platform_name: req.body.platform_name,
+    platform_link: req.body.platform_link
   };
 
   Music.create(music)

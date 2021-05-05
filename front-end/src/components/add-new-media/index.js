@@ -25,40 +25,41 @@ function AddNewMedia() {
     const description = document.getElementById("description").value;
     const platform_name = document.getElementById("platform_name").value;
     const platform_link = document.getElementById("platform_link").value;
+    const genre = document.getElementById("genre").value;
 
     if (location === "to_library") {
       if (type === "book") {
-        const obj = { username, title, "cover_art": image_link, "author": artist};
+        const obj = { username, title, "cover_art": image_link, "author": artist, "platform_name": platform_name, "platform_link": platform_link };
         BookDataService.addBookToLibrary(obj);
       }
       else if (type === "movie") {
-        const obj = { username, title, "box_art": image_link, "description": description};
+        const obj = { username, title, "box_art": image_link, "description": description, "platform_name": platform_name, "platform_link": platform_link };
         MovieDataService.addMovieToLibrary(obj);
       }
       else if (type === "music") {
-        const obj = { username, title, "album_art": image_link, "artist": artist};
+        const obj = { username, title, "album_art": image_link, "artist": artist, "genre": genre, "platform_name": platform_name, "platform_link": platform_link };
         MusicDataService.addMusicToLibrary(obj);
       }
       else if (type === "video_game") {
-        const obj = { username, title, "box_art": image_link, "description": description};
+        const obj = { username, title, "box_art": image_link, "description": description, "platform_name": platform_name, "platform_link": platform_link };
         VideoGameDataService.addVideoGameToLibrary(obj);
       }
     }
     else {
       if (type === "book") {
-        const obj = { username, title, "cover_art": image_link, "author": artist};
-        BookDataService.addBookToWishlist(obj);
+        const obj = { username, title, "cover_art": image_link, "author": artist, "platform_name": platform_name, "platform_link": platform_link };
+        BookDataService.addBookToLibrary(obj);
       }
       else if (type === "movie") {
-        const obj = { username, title, "box_art": image_link, "description": description};
+        const obj = { username, title, "box_art": image_link, "description": description, "platform_name": platform_name, "platform_link": platform_link };
         MovieDataService.addMovieToLibrary(obj);
       }
       else if (type === "music") {
-        const obj = { username, title, "album_art": image_link, "artist": artist};
+        const obj = { username, title, "album_art": image_link, "artist": artist, "genre": genre, "platform_name": platform_name, "platform_link": platform_link };
         MusicDataService.addMusicToLibrary(obj);
       }
       else if (type === "video_game") {
-        const obj = { username, title, "box_art": image_link, "description": description};
+        const obj = { username, title, "box_art": image_link, "description": description, "platform_name": platform_name, "platform_link": platform_link };
         VideoGameDataService.addVideoGameToLibrary(obj);
       }
     }
