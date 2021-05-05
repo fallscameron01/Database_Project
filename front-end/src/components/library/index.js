@@ -31,6 +31,8 @@ const data = [
   }
 ];
 
+const good = BookDataService.getAllBooks("library");
+
 function Library() {
   const [type, setType] = useState("All");
   const [sort, setSort] = useState("alphabetical");
@@ -38,6 +40,7 @@ function Library() {
   const handleType = () => {
     const value = document.getElementById("types");
     setType(value.value);
+    console.log(good);
   };
 
   const handleSort = () => {

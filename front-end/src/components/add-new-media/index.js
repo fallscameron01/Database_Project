@@ -18,7 +18,6 @@ function AddNewMedia() {
     const platform_name = document.getElementById("platform_name").value;
     const platform_link = document.getElementById("platform_link").value;
 
-    console.log(type);
     if (location === "to_library") {
       if (type === "book") {
         const obj = { username, title, "cover_art": image_link, "author": artist};
@@ -27,7 +26,8 @@ function AddNewMedia() {
     }
     else {
       if (type === "book") {
-        
+        const obj = { username, title, "cover_art": image_link, "author": artist};
+        BookDataService.addBookToWishlist(obj);
       }
     }
   };

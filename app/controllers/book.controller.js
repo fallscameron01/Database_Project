@@ -65,6 +65,36 @@ exports.addBook = (req, res) => {
   }
 };
 
+// Find all books
+exports.findAllBooks = (req, res) => {
+  const location = req.params.location;
+  
+  if (location === "library") {
+    InBookLibrary.findAll()
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials."
+      });
+    });
+  }
+  else {
+    InBookWishlist.findAll()
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials."
+      });
+    });
+  }
+};
+
 // Find Book
 exports.findBook = (req, res) => {
   const title = req.params.title;

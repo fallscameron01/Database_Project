@@ -12,6 +12,9 @@ module.exports = app => {
   // Modify book
   router.put("/:title", book.update);
 
+  // Get all books
+  router.get("/:location", book.findAllBooks);
+
   // Find book by title
   router.get("/:title", book.findBook);
 
