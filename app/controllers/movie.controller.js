@@ -4,10 +4,8 @@ const InMovieLibrary = db.in_movie_library;
 const InMovieWishlist = db.in_movie_wishlist;
 const Op = db.Sequelize.Op;
 
-// Add movie
-exports.addMovie = (req, res) => {
-  const location = req.params.location;
-
+// Add movie to library
+exports.addMovieToLibrary = (req, res) => {
   // Validate request
   if (!req.body.title) {
     res.status(400).send({
@@ -19,12 +17,10 @@ exports.addMovie = (req, res) => {
   const movie = {
     title: req.body.title,
     box_art: req.body.box_art,
-    description: req.body.description,
-    platform_name: req.body.platform_name,
-    platform_link: req.body.platform_link
+    description: req.body.description
   };
 
-  // Save Movie in the database
+  
   Movie.create(movie)
     .then(data => {
       res.send(data);
@@ -32,7 +28,7 @@ exports.addMovie = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the movie."
+          err.message || "Some error occurred while creating the user."
       });
     });
 
@@ -41,60 +37,88 @@ exports.addMovie = (req, res) => {
     title: req.body.title
   };
 
-  if (location === "library") {
-    InMovieLibrary.create(movie_location)
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the movie."
-      });
+  InMovieLibrary.create(movie_location)
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while creating the user."
     });
-  }
-  else {
-    InMovieWishlist.create(movie_location)
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the movie."
-      });
-    });
-  }
+  });
 };
 
-// Find all movies
-exports.findAllMovies = (req, res) => {
-  const location = req.params.location;
-  
-  if (location === "library") {
-    InMovieLibrary.findAll()
+// Add movie to Wishlist
+exports.addMovieToWishlist = (req, res) => {
+  // Validate request
+  if (!req.body.title) {
+    res.status(400).send({
+      message: "Content can not be empty!"
+    });
+    return;
+  }
+
+  const movie = {
+    title: req.body.title,
+    cover_art: req.body.cover_art,
+    author: req.body.author
+  };
+
+  Movie.create(movie)
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving tutorials."
+          err.message || "Some error occurred while creating the user."
       });
     });
-  }
-  else {
-    InMovieWishlist.findAll()
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving tutorials."
-      });
+
+  const movie_location = {
+    username: req.body.username,
+    title: req.body.title
+  };
+
+  InMovieWishlist.create(movie_location)
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while creating the user."
     });
-  }
+  });
+};
+
+// Find all movies in Library
+exports.findAllMoviesInLibrary = (req, res) => {  
+  InMovieLibrary.findAll()
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while retrieving tutorials."
+    });
+  });
+};
+
+// Find all movies in Wishlist
+exports.findAllMoviesInWishlist = (req, res) => {  
+  InMovieWishlist.findAll()
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while retrieving tutorials."
+    });
+  });
 };
 
 // Find Movie
@@ -113,7 +137,7 @@ exports.findMovie = (req, res) => {
     });
 };
 
-// Modify movie
+// Modify Movie
 exports.update = (req, res) => {
   const title = req.params.title;
 

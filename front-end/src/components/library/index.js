@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import addNew from "./images/add-new.PNG";
 import BookDataService from "../../services/book.service";
+import MovieDataService from "../../services/movie.service";
 import { useGlobal } from "reactn";
 
 let data = [];
@@ -20,6 +21,22 @@ function Library() {
           BookDataService.getBook(temp[i].title).then(singleBook => {
             singleBook = JSON.parse(singleBook);
             list.push({ "title": singleBook.title, "box_art": singleBook.cover_art, "author": singleBook.author, "type": "Book" });
+          });
+        }
+      }
+    }).finally(() => {
+      data = list;
+      setSort(sort);
+    });
+
+    MovieDataService.getAllMovies("library").then(movies => {
+      let temp = JSON.parse(movies);
+      
+      for (let i = 0; i < temp.length; i++) {
+        if (temp[i].username === username) {
+          MovieDataService.getMovie(temp[i].title).then(singleMovie => {
+            singleMovie = JSON.parse(singleMovie);
+            list.push({ "title": singleMovie.title, "box_art": singleMovie.box_art, "description": singleMovie.decription, "type": "Movie" });
           });
         }
       }

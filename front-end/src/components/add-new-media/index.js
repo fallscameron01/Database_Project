@@ -2,6 +2,7 @@ import React from "react";
 import "./index.css";
 import { useGlobal } from "reactn";
 import BookDataService from "../../services/book.service";
+import MovieDataService from "../../services/movie.service";
 
 function AddNewMedia() {
   const [username] = useGlobal("username");
@@ -23,11 +24,19 @@ function AddNewMedia() {
         const obj = { username, title, "cover_art": image_link, "author": artist};
         BookDataService.addBookToLibrary(obj);
       }
+      else if (type === "movie") {
+        const obj = { username, title, "box_art": image_link, "description": description};
+        MovieDataService.addMovieToLibrary(obj);
+      }
     }
     else {
       if (type === "book") {
         const obj = { username, title, "cover_art": image_link, "author": artist};
         BookDataService.addBookToWishlist(obj);
+      }
+      else if (type === "movie") {
+        const obj = { username, title, "box_art": image_link, "description": description};
+        MovieDataService.addMovieToLibrary(obj);
       }
     }
   };
