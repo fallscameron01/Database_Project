@@ -24,5 +24,11 @@ module.exports = app => {
   // Delete book by title
   router.delete("/:title", book.delete);
 
+  // Count books in library
+  router.get("/library/count", book.countBooksInLibrary);
+
+  // Count books in wishlist
+  router.get("/wishlist/count", book.countBooksInWishlist);
+
   app.use('/api/book', router);
 };

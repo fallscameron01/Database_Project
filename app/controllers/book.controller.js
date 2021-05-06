@@ -244,3 +244,32 @@ exports.delete = (req, res) => {
       });
     });
 };
+
+
+// Count all books in library
+exports.countBooksInLibrary = (req, res) => {  
+  InBookLibrary.count()
+  .then(data => {
+    res.send({"count": data});
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Error"
+    });
+  });
+};
+
+// Count all books in wishlist
+exports.countBooksInWishlist = (req, res) => {  
+  InBookWishlist.count()
+  .then(data => {
+    res.send({"count": data});
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Error"
+    });
+  });
+};

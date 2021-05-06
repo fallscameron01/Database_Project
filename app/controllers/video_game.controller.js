@@ -151,7 +151,7 @@ exports.removeVideoGameFromWishlist = (req, res) => {
 
 // Find all video games in Library
 exports.findAllVideoGamesInLibrary = (req, res) => {  
-  InVideoGameLibrary.findAll()
+  InVideoGameLibrary.findAndCountAll()
   .then(data => {
     res.send(data);
   })
@@ -242,4 +242,32 @@ exports.delete = (req, res) => {
         message: "Could not delete Video Game with title=" + title
       });
     });
+};
+
+// Count all video games in library
+exports.countVideoGamesInLibrary = (req, res) => {  
+  InVideoGameLibrary.count()
+  .then(data => {
+    res.send({"count": data});
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Error"
+    });
+  });
+};
+
+// Count all video games in wishlist
+exports.countVideoGamesInWishlist = (req, res) => {  
+  InVideoGameWishlist.count()
+  .then(data => {
+    res.send({"count": data});
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Error"
+    });
+  });
 };

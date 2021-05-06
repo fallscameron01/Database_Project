@@ -245,3 +245,31 @@ exports.delete = (req, res) => {
       });
     });
 };
+
+// Count all music in library
+exports.countMusicsInLibrary = (req, res) => {  
+  InMusicLibrary.count()
+  .then(data => {
+    res.send({"count": data});
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Error"
+    });
+  });
+};
+
+// Count all music in wishlist
+exports.countMusicsInWishlist = (req, res) => {  
+  InMusicWishlist.count()
+  .then(data => {
+    res.send({"count": data});
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Error"
+    });
+  });
+};

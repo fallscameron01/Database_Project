@@ -242,3 +242,31 @@ exports.delete = (req, res) => {
       });
     });
 };
+
+// Count all books in library
+exports.countMoviesInLibrary = (req, res) => {  
+  InMovieLibrary.count()
+  .then(data => {
+    res.send({"count": data});
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Error"
+    });
+  });
+};
+
+// Count all books in wishlist
+exports.countMoviesInWishlist = (req, res) => {  
+  InMovieWishlist.count()
+  .then(data => {
+    res.send({"count": data});
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Error"
+    });
+  });
+};

@@ -21,6 +21,7 @@ function Library() {
   const [genre, setGenre] = useState(current.genre);
   const [platformName, setPlatformName] = useState(current.platform_name);
   const [platformLink, setPlatformLink] = useState(current.platform_link);
+  const [amount, setAmount] = useState(0);
 
   const hideModal = () => {
     setModalOpen(false);

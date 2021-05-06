@@ -24,5 +24,11 @@ module.exports = app => {
   // Delete movie by title
   router.delete("/:title", movie.delete);
 
+  // Count movies in library
+  router.get("/library/count", movie.countMoviesInLibrary);
+
+  // Count movies in wishlist
+  router.get("/wishlist/count", movie.countMoviesInWishlist);
+
   app.use('/api/movie', router);
 };

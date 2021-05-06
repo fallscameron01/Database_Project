@@ -24,5 +24,11 @@ module.exports = app => {
   // Delete video game by title
   router.delete("/:title", video_game.delete);
 
+  // Count video games in library
+  router.get("/library/count", video_game.countVideoGamesInLibrary);
+
+  // Count video games in wishlist
+  router.get("/wishlist/count", video_game.countVideoGamesInWishlist);
+
   app.use('/api/video_game', router);
 };
