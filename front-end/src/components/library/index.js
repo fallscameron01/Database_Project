@@ -137,6 +137,23 @@ function Library() {
     document.getElementById("add-new-media").click();
   };
 
+  const deleteMedia = () => {
+    if (current.type === "Video Game") {
+      VideoGameDataService.deleteVideoGame(current.title)
+    }
+    else if (current.type === "Movie") {
+      MovieDataService.deleteMovie(current.title)
+    }
+    else if (current.type === "Music") {
+      MusicDataService.deleteMusic(current.title)
+    }
+    else if (current.type === "Book") {
+      BookDataService.deleteBook(current.title)
+    }
+
+    hideModal();
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     
@@ -274,6 +291,7 @@ function Library() {
             </div>
           </Modal.Body>
           <Modal.Footer>
+            <button style={{color: "red"}} onClick={deleteMedia}>Delete</button>
             <button onClick={hideModal}>Cancel</button>
           </Modal.Footer>
         </Modal>

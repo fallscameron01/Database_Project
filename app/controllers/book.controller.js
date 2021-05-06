@@ -1,4 +1,5 @@
 const db = require("../models");
+const bookModel = require("../models/book.model");
 const Book = db.book;
 const InBookLibrary = db.in_book_library;
 const InBookWishlist = db.in_book_wishlist;
@@ -215,6 +216,31 @@ exports.update = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message: "Error updating book with title=" + title
+      });
+    });
+};
+
+// Delete Book
+exports.delete = (req, res) => {
+  const title = req.params.title;
+
+  Book.destroy({
+    where: { title: title }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Book was deleted successfully!"
+        });
+      } else {
+        res.send({
+          message: `Cannot delete Book with id=${id}. Maybe Book was not found!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete Book with id=" + id
       });
     });
 };

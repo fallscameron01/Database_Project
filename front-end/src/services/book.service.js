@@ -97,6 +97,26 @@ class BookDataService {
       console.log(error);
     });
   }
+
+  async deleteBook(title) {
+    var config = {
+      method: 'delete',
+      url: `http://localhost:8080/api/book/${title}`,
+      headers: { 
+        'Content-Type': 'application/json'
+      }
+    };
+    
+    const res = await axios(config)
+    .then(function (response) {
+      return (JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+    return await res;
+  }
 }
 
 export default new BookDataService();

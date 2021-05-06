@@ -97,6 +97,26 @@ class MusicDataService {
       console.log(error);
     });
   }
+
+  async deleteMusic(title) {
+    var config = {
+      method: 'delete',
+      url: `http://localhost:8080/api/music/${title}`,
+      headers: { 
+        'Content-Type': 'application/json'
+      }
+    };
+    
+    const res = await axios(config)
+    .then(function (response) {
+      return (JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+    return await res;
+  }
 }
 
 export default new MusicDataService();

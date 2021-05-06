@@ -21,5 +21,8 @@ module.exports = app => {
   // Find music by title
   router.get("/:title", music.findMusic);
 
+  // Delete music by title
+  router.delete("/:title", music.delete);
+
   app.use('/api/music', router);
 };

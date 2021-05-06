@@ -217,3 +217,28 @@ exports.update = (req, res) => {
       });
     });
 };
+
+// Delete Movie
+exports.delete = (req, res) => {
+  const title = req.params.title;
+
+  Movie.destroy({
+    where: { title: title }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Movie was deleted successfully!"
+        });
+      } else {
+        res.send({
+          message: `Cannot delete Movie with title=${title}`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete Movie with title=" + title
+      });
+    });
+};

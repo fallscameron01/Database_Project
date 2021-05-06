@@ -21,5 +21,8 @@ module.exports = app => {
   // Find video game by title
   router.get("/:title", video_game.findVideoGame);
 
+  // Delete video game by title
+  router.delete("/:title", video_game.delete);
+
   app.use('/api/video_game', router);
 };

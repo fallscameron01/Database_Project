@@ -21,5 +21,8 @@ module.exports = app => {
   // Find book by title
   router.get("/:title", book.findBook);
 
+  // Delete book by title
+  router.delete("/:title", book.delete);
+
   app.use('/api/book', router);
 };

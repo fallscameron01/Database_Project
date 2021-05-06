@@ -21,5 +21,8 @@ module.exports = app => {
   // Find movie by title
   router.get("/:title", movie.findMovie);
 
+  // Delete movie by title
+  router.delete("/:title", movie.delete);
+
   app.use('/api/movie', router);
 };

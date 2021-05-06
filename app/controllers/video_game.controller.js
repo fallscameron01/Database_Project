@@ -217,3 +217,29 @@ exports.update = (req, res) => {
       });
     });
 };
+
+
+// Delete Video Game
+exports.delete = (req, res) => {
+  const title = req.params.title;
+
+  VideoGame.destroy({
+    where: { title: title }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Video Game was deleted successfully!"
+        });
+      } else {
+        res.send({
+          message: `Cannot delete Video Game with title=${title}`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete Video Game with title=" + title
+      });
+    });
+};

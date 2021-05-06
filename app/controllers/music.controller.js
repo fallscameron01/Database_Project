@@ -219,3 +219,29 @@ exports.update = (req, res) => {
       });
     });
 };
+
+
+// Delete Music
+exports.delete = (req, res) => {
+  const title = req.params.title;
+
+  Music.destroy({
+    where: { title: title }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Music was deleted successfully!"
+        });
+      } else {
+        res.send({
+          message: `Cannot delete Music with title=${title}`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete Music with title=" + title
+      });
+    });
+};
