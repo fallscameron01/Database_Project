@@ -85,6 +85,7 @@ function AddNewMedia() {
             <option value="music">Music</option>
             <option value="book">Book</option>
           </select><div/>
+
           <div>
             <label>Title:</label>
             <input type="text" name="title" id="title" /><div/>

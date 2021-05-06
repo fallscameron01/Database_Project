@@ -22,7 +22,6 @@ exports.addMovieToLibrary = (req, res) => {
     platform_link: req.body.platform_link
   };
 
-  
   Movie.create(movie)
     .then(data => {
       res.send(data);
@@ -30,7 +29,7 @@ exports.addMovieToLibrary = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the user."
+          err.message || "Some error occurred while creating the movie."
       });
     });
 
@@ -46,7 +45,7 @@ exports.addMovieToLibrary = (req, res) => {
   .catch(err => {
     res.status(500).send({
       message:
-        err.message || "Some error occurred while creating the user."
+        err.message || "Some error occurred while creating the movie."
     });
   });
 };
@@ -76,7 +75,7 @@ exports.addMovieToWishlist = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the user."
+          err.message || "Some error occurred while creating the movie."
       });
     });
 
@@ -92,9 +91,62 @@ exports.addMovieToWishlist = (req, res) => {
   .catch(err => {
     res.status(500).send({
       message:
-        err.message || "Some error occurred while creating the user."
+        err.message || "Some error occurred while creating the movie."
     });
   });
+};
+
+
+// Remove movie from library
+exports.removeMovieFromLibrary = (req, res) => {
+  const title = req.params.title;
+  const username = req.body.username;
+
+  InMovieLibrary.destroy(req.body, {
+    where: { title: title, username: username}
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Movie was removed from library successfully."
+        });
+      } else {
+        res.send({
+          message: `Cannot remove movie with title=${title} for username=${username}`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error removing movie with title=" + title
+      });
+    });
+};
+
+// Remove movie from wishlist
+exports.removeMovieFromWishlist = (req, res) => {
+  const title = req.params.title;
+  const username = req.body.username;
+
+  InMovieWishlist.destroy(req.body, {
+    where: { title: title, username: username}
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Movie was removed from wishlist successfully."
+        });
+      } else {
+        res.send({
+          message: `Cannot remove movie with title=${title} for username=${username}`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error removing movie with title=" + title
+      });
+    });
 };
 
 // Find all movies in Library
@@ -106,7 +158,7 @@ exports.findAllMoviesInLibrary = (req, res) => {
   .catch(err => {
     res.status(500).send({
       message:
-        err.message || "Some error occurred while retrieving tutorials."
+        err.message || "Some error occurred while retrieving movies."
     });
   });
 };
@@ -120,7 +172,7 @@ exports.findAllMoviesInWishlist = (req, res) => {
   .catch(err => {
     res.status(500).send({
       message:
-        err.message || "Some error occurred while retrieving tutorials."
+        err.message || "Some error occurred while retrieving movies."
     });
   });
 };
@@ -136,7 +188,7 @@ exports.findMovie = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving tutorials."
+          err.message || "Some error occurred while retrieving movies."
       });
     });
 };

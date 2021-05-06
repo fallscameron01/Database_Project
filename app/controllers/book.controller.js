@@ -30,7 +30,7 @@ exports.addBookToLibrary = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the user."
+          err.message || "Some error occurred while creating the book."
       });
     });
 
@@ -46,7 +46,7 @@ exports.addBookToLibrary = (req, res) => {
   .catch(err => {
     res.status(500).send({
       message:
-        err.message || "Some error occurred while creating the user."
+        err.message || "Some error occurred while creating the book."
     });
   });
 };
@@ -77,7 +77,7 @@ exports.addBookToWishlist = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the user."
+          err.message || "Some error occurred while creating the book."
       });
     });
 
@@ -93,9 +93,61 @@ exports.addBookToWishlist = (req, res) => {
   .catch(err => {
     res.status(500).send({
       message:
-        err.message || "Some error occurred while creating the user."
+        err.message || "Some error occurred while creating the book."
     });
   });
+};
+
+// Remove book from library
+exports.removeBookFromLibrary = (req, res) => {
+  const title = req.params.title;
+  const username = req.body.username;
+
+  InBookLibrary.destroy(req.body, {
+    where: { title: title, username: username}
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Book was removed from library successfully."
+        });
+      } else {
+        res.send({
+          message: `Cannot remove book with title=${title} for username=${username}`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error removing book with title=" + title
+      });
+    });
+};
+
+// Remove book from wishlist
+exports.removeBookFromWishlist = (req, res) => {
+  const title = req.params.title;
+  const username = req.body.username;
+
+  InBookWishlist.destroy(req.body, {
+    where: { title: title, username: username}
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Book was removed from wishlist successfully."
+        });
+      } else {
+        res.send({
+          message: `Cannot remove book with title=${title} for username=${username}`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error removing book with title=" + title
+      });
+    });
 };
 
 // Find all books in Library
@@ -107,7 +159,7 @@ exports.findAllBooksInLibrary = (req, res) => {
   .catch(err => {
     res.status(500).send({
       message:
-        err.message || "Some error occurred while retrieving tutorials."
+        err.message || "Some error occurred while retrieving books."
     });
   });
 };
@@ -121,7 +173,7 @@ exports.findAllBooksInWishlist = (req, res) => {
   .catch(err => {
     res.status(500).send({
       message:
-        err.message || "Some error occurred while retrieving tutorials."
+        err.message || "Some error occurred while retrieving books."
     });
   });
 };
@@ -137,7 +189,7 @@ exports.findBook = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving tutorials."
+          err.message || "Some error occurred while retrieving books."
       });
     });
 };
@@ -162,7 +214,7 @@ exports.update = (req, res) => {
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error updating Tutorial with title=" + title
+        message: "Error updating book with title=" + title
       });
     });
 };

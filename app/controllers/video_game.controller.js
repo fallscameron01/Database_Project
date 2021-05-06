@@ -21,7 +21,6 @@ exports.addVideoGameToLibrary = (req, res) => {
     platform_name: req.body.platform_name,
     platform_link: req.body.platform_link
   };
-
   
   VideoGame.create(video_game)
     .then(data => {
@@ -95,6 +94,59 @@ exports.addVideoGameToWishlist = (req, res) => {
         err.message || "Some error occurred while creating the video game."
     });
   });
+};
+
+
+// Remove videogame from library
+exports.removeVideoGameFromLibrary = (req, res) => {
+  const title = req.params.title;
+  const username = req.body.username;
+
+  InVideoGameLibrary.destroy(req.body, {
+    where: { title: title, username: username}
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "VideoGame was removed from library successfully."
+        });
+      } else {
+        res.send({
+          message: `Cannot remove videogame with title=${title} for username=${username}`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error removing videogame with title=" + title
+      });
+    });
+};
+
+// Remove videogame from wishlist
+exports.removeVideoGameFromWishlist = (req, res) => {
+  const title = req.params.title;
+  const username = req.body.username;
+
+  InVideoGameWishlist.destroy(req.body, {
+    where: { title: title, username: username}
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "VideoGame was removed from wishlist successfully."
+        });
+      } else {
+        res.send({
+          message: `Cannot remove videogame with title=${title} for username=${username}`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error removing videogame with title=" + title
+      });
+    });
 };
 
 // Find all video games in Library

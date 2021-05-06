@@ -22,7 +22,6 @@ exports.addMusicToLibrary = (req, res) => {
     platform_name: req.body.platform_name,
     platform_link: req.body.platform_link
   };
-
   
   Music.create(music)
     .then(data => {
@@ -31,7 +30,7 @@ exports.addMusicToLibrary = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the user."
+          err.message || "Some error occurred while creating the music."
       });
     });
 
@@ -47,7 +46,7 @@ exports.addMusicToLibrary = (req, res) => {
   .catch(err => {
     res.status(500).send({
       message:
-        err.message || "Some error occurred while creating the user."
+        err.message || "Some error occurred while creating the music."
     });
   });
 };
@@ -78,7 +77,7 @@ exports.addMusicToWishlist = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the user."
+          err.message || "Some error occurred while creating the music."
       });
     });
 
@@ -94,9 +93,62 @@ exports.addMusicToWishlist = (req, res) => {
   .catch(err => {
     res.status(500).send({
       message:
-        err.message || "Some error occurred while creating the user."
+        err.message || "Some error occurred while creating the music."
     });
   });
+};
+
+
+// Remove music from library
+exports.removeMusicFromLibrary = (req, res) => {
+  const title = req.params.title;
+  const username = req.body.username;
+
+  InMusicLibrary.destroy(req.body, {
+    where: { title: title, username: username}
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Music was removed from library successfully."
+        });
+      } else {
+        res.send({
+          message: `Cannot remove music with title=${title} for username=${username}`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error removing music with title=" + title
+      });
+    });
+};
+
+// Remove music from wishlist
+exports.removeMusicFromWishlist = (req, res) => {
+  const title = req.params.title;
+  const username = req.body.username;
+
+  InMusicWishlist.destroy(req.body, {
+    where: { title: title, username: username}
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Music was removed from wishlist successfully."
+        });
+      } else {
+        res.send({
+          message: `Cannot remove music with title=${title} for username=${username}`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error removing music with title=" + title
+      });
+    });
 };
 
 // Find all musics in Library
@@ -108,7 +160,7 @@ exports.findAllMusicsInLibrary = (req, res) => {
   .catch(err => {
     res.status(500).send({
       message:
-        err.message || "Some error occurred while retrieving tutorials."
+        err.message || "Some error occurred while retrieving musics."
     });
   });
 };
@@ -122,7 +174,7 @@ exports.findAllMusicsInWishlist = (req, res) => {
   .catch(err => {
     res.status(500).send({
       message:
-        err.message || "Some error occurred while retrieving tutorials."
+        err.message || "Some error occurred while retrieving musics."
     });
   });
 };
@@ -138,7 +190,7 @@ exports.findMusic = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving tutorials."
+          err.message || "Some error occurred while retrieving musics."
       });
     });
 };
