@@ -48,19 +48,19 @@ function AddNewMedia() {
     else {
       if (type === "book") {
         const obj = { username, title, "cover_art": image_link, "author": artist, "platform_name": platform_name, "platform_link": platform_link };
-        BookDataService.addBookToLibrary(obj);
+        BookDataService.addBookToWishlist(obj);
       }
       else if (type === "movie") {
         const obj = { username, title, "box_art": image_link, "description": description, "platform_name": platform_name, "platform_link": platform_link };
-        MovieDataService.addMovieToLibrary(obj);
+        MovieDataService.addMovieToWishlist(obj);
       }
       else if (type === "music") {
         const obj = { username, title, "album_art": image_link, "artist": artist, "genre": genre, "platform_name": platform_name, "platform_link": platform_link };
-        MusicDataService.addMusicToLibrary(obj);
+        MusicDataService.addMusicToWishlist(obj);
       }
       else if (type === "video_game") {
         const obj = { username, title, "box_art": image_link, "description": description, "platform_name": platform_name, "platform_link": platform_link };
-        VideoGameDataService.addVideoGameToLibrary(obj);
+        VideoGameDataService.addVideoGameToWishlist(obj);
       }
     }
   };

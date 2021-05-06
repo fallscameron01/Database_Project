@@ -7,7 +7,7 @@ module.exports = (sequelize, Sequelize) => {
     box_art: {
       type: Sequelize.STRING
     },
-    decription: {
+    description: {
       type: Sequelize.STRING
     },
     platform_name: {
