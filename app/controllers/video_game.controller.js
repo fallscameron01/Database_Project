@@ -151,7 +151,7 @@ exports.removeVideoGameFromWishlist = (req, res) => {
 
 // Find all video games in Library
 exports.findAllVideoGamesInLibrary = (req, res) => {  
-  InVideoGameLibrary.findAndCountAll()
+  InVideoGameLibrary.findAll()
   .then(data => {
     res.send(data);
   })
